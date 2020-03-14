@@ -5,11 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <style type="text/css">
-        .auto-style1 {
-            color: #000000;
-        }
-    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -18,6 +13,7 @@
                 <asp:View ID="ankietaGlowna" runat="server">
                     Imię:<br />
                     <asp:TextBox ID="imieTextBox" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="imieTextBox" ErrorMessage="Pole imię jest wymagane.">*</asp:RequiredFieldValidator>
                     <br />
                     <br />
                     Płeć:<br />
@@ -30,10 +26,13 @@
                     <br />
                     Email:<br />
                     <asp:TextBox ID="emailTextBox" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="emailTextBox" ErrorMessage="Pole e-mail jest wymagane.">*</asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="emailTextBox" ErrorMessage="Nieprawidłowy adres e-mail." ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">*</asp:RegularExpressionValidator>
                     <br />
                     <br />
                     Telefon:<br />
                     <asp:TextBox ID="telTextBox" runat="server"></asp:TextBox>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="telTextBox" ErrorMessage="Nieprawidłowy numer telefonu. Podaj same cyfry." ValidationExpression="([0-9]+)$">*</asp:RegularExpressionValidator>
                     <br />
                     <br />
                     Ulica:<br />
@@ -55,10 +54,13 @@
                     Miejscowość:<br />
                     <asp:TextBox ID="miejscTextBox" runat="server"></asp:TextBox>
                     <br />
+                    <br />
                     <asp:MultiView ID="ankietaMultiView" runat="server">
                         <asp:View ID="nowyView" runat="server">
                             Wzrost:<br />
                             <asp:TextBox ID="wzrostTextBox" runat="server"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="wzrostTextBox" ErrorMessage="Neprawidłowy wzrost. Podaj wzrost w centymetrach." ValidationExpression="([0-9]+)$">*</asp:RegularExpressionValidator>
+                            <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="wzrostTextBox" ErrorMessage="Podaj poprawny wzrost w zakresie od 50 do 250 cm." MaximumValue="250" MinimumValue="50" Type="Integer">*</asp:RangeValidator>
                             <br />
                             <br />
                             Rama roweru:<br />
@@ -101,8 +103,12 @@
                             </asp:RadioButtonList>
                             od:
                             <asp:TextBox ID="odTextBox" runat="server"></asp:TextBox>
-                            &nbsp;do:
+                            &nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="odTextBox" ErrorMessage="Nieprawidłowa kwota. Podaj zaokrąklając do pełnych złotych." ValidationExpression="([0-9]+)$">*</asp:RegularExpressionValidator>
+                            do:
                             <asp:TextBox ID="doTextBox" runat="server"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="doTextBox" ErrorMessage="Nieprawidłowa kwota. Podaj zaokrąklając do pełnych złotych." ValidationExpression="([0-9]+)$">*</asp:RegularExpressionValidator>
+                            <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="odTextBox" ControlToValidate="doTextBox" ErrorMessage="Wartość w polu &quot;do&quot; musi być większa od wartości w polu &quot;od&quot;." Operator="GreaterThan" Type="Integer">*</asp:CompareValidator>
+                            <br />
                         </asp:View>
                         <asp:View ID="wycieczkiView" runat="server">
                             Rodzaj posiadanego roweru:<br />
@@ -132,8 +138,10 @@
                                 <asp:ListItem Value="S">Średniozaawansowany</asp:ListItem>
                                 <asp:ListItem Value="Z">Zaawansowany</asp:ListItem>
                             </asp:DropDownList>
+                            <br />
                         </asp:View>
                     </asp:MultiView>
+                    <br />
                     Preferowany rodzaj kontaktu:<br />
                     <asp:CheckBoxList ID="kontaktCheckBoxList" runat="server">
                         <asp:ListItem Value="E">E-Mail</asp:ListItem>
@@ -142,12 +150,14 @@
                     </asp:CheckBoxList>
                     <br />
                     <asp:Button ID="wyswietlButton" runat="server" Text="Wyświetl" OnClick="wyswietlButton_Click" />
+                    <br />
                 </asp:View>
                 <asp:View ID="podsumowanie" runat="server">
                     Dziękujemy za wypełnienie ankiety!<br />
-                    <a href="Default.aspx">Strona główna</a>
+                    <a href="Default.aspx">Strona główna</a><br />
                 </asp:View>
             </asp:MultiView>
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
         </div>
     </form>
 </body>

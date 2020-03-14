@@ -22,7 +22,7 @@ namespace WebApplication1
 
         protected void wyswietlButton_Click(object sender, EventArgs e)
         {
-            mainMultiView.SetActiveView(podsumowanie);
+            if (IsValid) { mainMultiView.SetActiveView(podsumowanie); }
         }
     }
 }

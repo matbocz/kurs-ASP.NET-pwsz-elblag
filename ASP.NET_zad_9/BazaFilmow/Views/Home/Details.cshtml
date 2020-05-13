@@ -1,0 +1,42 @@
+﻿@model BazaFilmow.Models.Film
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Film</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tytul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tytul)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rezyser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rezyser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataPremiery)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataPremiery)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
